@@ -221,9 +221,8 @@ local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nguyen
 
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
-    About = Window: AddTab({ Title = "â€¢ information", Icon = "clipboard" }),
-	Settings = Window:AddTab({ Title = "â€¢ Settings", Icon = "cog" }),
-	Main = Window:AddTab({ Title = "â€¢ Auto Farm", Icon = "ghost" }),
+    About = Window: AddTab({ Title = "Information", Icon = "clipboard" }),
+	Main = Window:AddTab({ Title = "Auto Farm", Icon = "ghost" }),
 }
 
 local Options = Fluent.Options
@@ -239,9 +238,81 @@ Tabs.About:AddParagraph({
     Content = "1.0"
 })
 local Time = Tabs.About:AddParagraph({
-    Title = "",
-    Content = ""
+    Title = "Script Maker By Teddy",
+    Content = "S Update Thêm Sau Này =))"
 })
+--------------------------------------------------------------------------------------------------------
+Mn:Seperator("Ch  Farm")
+
+local WeaponList = {"V","Kim","Tri","Sng"}
+_G.SelectWeapon = "V"
+Mn:Dropdown("Chn V Kh",WeaponList,function(V)
+_G.SelectWeapon = V
+end)
+
+task.spawn(function()
+	while wait() do
+		pcall(function()
+			if _G.SelectWeapon == "V" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Melee" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			elseif _G.SelectWeapon == "Kim" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Sword" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			elseif _G.SelectWeapon == "Sng" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Gun" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			elseif _G.SelectWeapon == "Tri" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Blox Fruit" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			end
+		end)
+	end
+    end)
+
+local AttackList = {"Chm", "Bnh Thng", "Nhanh", "Cc Nhanh"}
+FireCooldown = "Cc Nhanh"
+Mn:Dropdown("Fast Attack Delay", AttackList,function(V)
+    FireCooldown = V
+end)
+spawn(function()
+    while wait() do
+        if FireCooldown then
+            pcall(function()
+                if FireCooldown == "Chm" then
+                    FireCooldown = 0.1
+                elseif FireCooldown == "Bnh Thng" then
+                    FireCooldown = 0.07
+                elseif FireCooldown == "Nhanh" then
+                    FireCooldown = 0.04
+                elseif FireCooldown == "Cc Nhanh" then
+                    FireCooldown = 0.02
+                end
+            end)
+        end
+    end
+end)
+
 local function UpdateOS()
     local date = os.date("*t")
     local hour = (date.hour) % 24
